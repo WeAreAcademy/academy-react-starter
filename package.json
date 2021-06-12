@@ -22,7 +22,8 @@
     "format:check": "prettier --check src",
     "lint": "eslint src",
     "type-check": "tsc --noEmit",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
     "start": "react-scripts start",
     "build": "react-scripts build"
   },
