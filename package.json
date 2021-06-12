@@ -18,6 +18,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
