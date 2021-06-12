@@ -1,7 +1,8 @@
 {
-  "name": "react-about-me",
+  "name": "cra-simplified",
   "version": "0.1.0",
   "private": true,
+  "license": "CC-BY-NC-ND-4.0",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
