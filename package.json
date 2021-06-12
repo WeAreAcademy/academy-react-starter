@@ -20,10 +20,11 @@
   "scripts": {
     "format": "prettier --write src",
     "format:check": "prettier --check src",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "lint": "eslint src",
+    "type-check": "tsc --noEmit",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "browserslist": {
     "production": [
