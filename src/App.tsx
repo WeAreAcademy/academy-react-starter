@@ -1,9 +1,7 @@
 import MainContent from "./components/MainContent";
 
 function App(): JSX.Element {
-  return (
-    <MainContent />
-  );
+  return <MainContent />;
 }
 
 export default App;
