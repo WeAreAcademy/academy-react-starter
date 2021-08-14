@@ -51,7 +51,7 @@ function FavouriteImage(): JSX.Element {
     <section>
       {ArrayOfPlaces.map((place) => (
         <div key={place.title}>
-          <img src={place.imgUrl}></img>
+          <img alt="" src={place.imgUrl}></img>
           <h3>{place.title}</h3>
           <div>
             <b>
