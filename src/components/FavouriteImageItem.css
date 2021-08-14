@@ -1,0 +1,12 @@
+section {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  width: 400px;
+  height: 380px;
+  padding: 20px 80px;
+  margin-bottom: 20px;
+}
+section img {
+  width: 400px;
+}
