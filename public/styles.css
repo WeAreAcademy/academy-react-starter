@@ -1,18 +1,18 @@
 header {
-  background-color: darkgray;
-  text-align: center;
+  background-color: #181818;
+  color: aliceblue;
 }
 
 body {
   background-color: lightgrey;
-}
-
-.place {
-  background-color: lightsteelblue;
-  text-align: center;
   padding: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   margin-right: 200px;
   margin-left: 200px;
+  text-align: center;
+}
+
+.place {
+  background-color: lightsteelblue;
 }
