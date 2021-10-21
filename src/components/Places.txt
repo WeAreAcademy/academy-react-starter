@@ -1,0 +1,15 @@
+interface PlaceProps {
+    title: string
+    placeName: string;
+    countryName: string;
+    image: string;
+    imageAlt: string;
+    mapsLink: string;
+    description: string;
+}
+
+Sunny sunny Wales
+Tenby
+Wales
+images/tenby.jpg
+If you're looking for a sunny holiday in Wales, this is your best bet.
