@@ -35,6 +35,7 @@ export function Babies(props: Props): JSX.Element {
 
   return (
     <>
+      <FilterButtons />
       <div className="favs">
         My favourites:{" "}
         {favourites
