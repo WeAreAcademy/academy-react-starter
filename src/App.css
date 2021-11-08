@@ -7,3 +7,8 @@
   color: blue;
   background-color: paleturquoise;
 }
+
+.fav {
+  background-color: orange;
+  padding: 10;
+}

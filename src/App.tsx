@@ -5,6 +5,7 @@ import { SearchBar } from "./components/SearchBar";
 
 function App(): JSX.Element {
   const [searchText, setSearchText] = useState<string>("");
+
   return (
     <>
       <SearchBar searchText={searchText} handleSearchText={setSearchText} />
