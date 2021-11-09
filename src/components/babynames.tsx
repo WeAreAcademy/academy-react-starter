@@ -1,15 +1,20 @@
 import babies from "../babies.json";
 import { Baby } from "./babyname";
-import { useState } from "react";
 
 interface Props {
   searchText: string;
   searchSex: string;
+  handleAddToFavourites: React.Dispatch<React.SetStateAction<BabyProp[]>>;
+  favourites: BabyProp[];
 }
 
-export function Babies(props: Props): JSX.Element {
-  const [favourites, setFavourite] = useState<string[]>([]);
+type BabyProp = {
+  name: string;
+  sex: string;
+  id: number;
+};
 
+export function Babies(props: Props): JSX.Element {
   function filterBabies() {
     const sortedBabies = babies.filter((bab) =>
       bab.name.toLowerCase().includes(props.searchText.toLowerCase())
@@ -22,40 +27,19 @@ export function Babies(props: Props): JSX.Element {
         (bab) => bab.sex === props.searchSex
       );
     }
-    const objectBabies = sortedandOrderedBabies.map(
-      (bab: { id: number; sex: string; name: string }) => (
-        <Baby
-          id={bab.id}
-          key={bab.id}
-          sex={bab.sex}
-          name={bab.name}
-          handleAddToFavourites={(babyname: string) => {
-            if (favourites.includes(bab.name)) {
-              favourites.splice(favourites.indexOf(bab.name), 1);
-              setFavourite([...favourites]);
-            } else {
-              setFavourite([...favourites, bab.name]);
-            }
-          }}
-        />
-      )
-    );
+    const objectBabies = sortedandOrderedBabies.map((bab) => (
+      <Baby
+        key={bab.id}
+        BabyName={{ name: bab.name, sex: bab.sex, id: bab.id }}
+        handleAddToFavourites={props.handleAddToFavourites}
+        favourites={props.favourites}
+      />
+    ));
     return objectBabies;
   }
 
   return (
     <>
-      <div className="favs">
-        My favourites:{" "}
-        {favourites
-          .sort((a, b) => (a > b ? 1 : b > a ? -1 : 0))
-          .map((bub, idx) => (
-            <button key={idx} className="fav">
-              {bub}{" "}
-            </button>
-          ))}
-      </div>
-      <p></p>
       <div className="allbabies">{filterBabies()}</div>
     </>
   );

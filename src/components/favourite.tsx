@@ -1,7 +1,41 @@
-// import { Baby } from "../components/babyname";
-// import { useState } from "react";
-// import { FilterButtons } from "../components/filterButtons";
-// import babies from "../babies.json";
+interface FavouriteItemProps {
+  handleAddToFavourites(input: BabyProp[]): void;
+  favourites: BabyProp[];
+  BabyName: BabyProp;
+}
+
+type BabyProp = {
+  name: string;
+  sex: string;
+  id: number;
+};
+
+export function FavouriteItem(props: FavouriteItemProps): JSX.Element {
+  return (
+    <button
+      onClick={() =>
+        removeFavourites(
+          props.BabyName.name,
+          props.favourites,
+          props.handleAddToFavourites
+        )
+      }
+    >
+      {props.BabyName.name}
+    </button>
+  );
+}
+
+export function removeFavourites(
+  nameToRemove: string,
+  favourite: BabyProp[],
+  setFavourite: (name: BabyProp[]) => void
+): void {
+  const favouriteRemoved = favourite.filter(
+    (name) => name.name !== nameToRemove
+  );
+  setFavourite(favouriteRemoved);
+}
 
 // interface Props {
 //   favourites: string[];

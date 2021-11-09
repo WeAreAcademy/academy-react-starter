@@ -1,26 +1,34 @@
 interface Props {
+  handleAddToFavourites: React.Dispatch<React.SetStateAction<BabyProp[]>>;
+  favourites: BabyProp[];
+  BabyName: BabyProp;
+}
+type BabyProp = {
   name: string;
   sex: string;
   id: number;
-  handleAddToFavourites(input: string): void;
-}
+};
 
 export function Baby(props: Props): JSX.Element {
   return (
     <>
-      {props.sex === "f" ? (
+      {props.BabyName.sex === "f" ? (
         <button
           className="girl"
-          onClick={(e) => props.handleAddToFavourites(e.currentTarget.name)}
+          onClick={() =>
+            props.handleAddToFavourites([...props.favourites, props.BabyName])
+          }
         >
-          {props.name}
+          {props.BabyName.name}
         </button>
       ) : (
         <button
           className="boy"
-          onClick={(e) => props.handleAddToFavourites(e.currentTarget.name)}
+          onClick={() =>
+            props.handleAddToFavourites([...props.favourites, props.BabyName])
+          }
         >
-          {props.name}{" "}
+          {props.BabyName.name}{" "}
         </button>
       )}
     </>
