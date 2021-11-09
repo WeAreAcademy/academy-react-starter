@@ -22,11 +22,14 @@ function App(): JSX.Element {
         handleSearchText={setSearchText}
         handleSearchSex={setSearchSex}
       />
+      <br />
       <FavouriteItems
         handleAddToFavourites={setFavourites}
         favourites={favourites}
       />
+      <br />
       <h2>Find my baby!</h2>
+      <br />
       <Babies
         searchText={searchText}
         searchSex={searchSex}

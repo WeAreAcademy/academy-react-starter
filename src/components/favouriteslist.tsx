@@ -14,6 +14,7 @@ type BabyProp = {
 export function FavouriteItems(props: FavouriteItemsProps): JSX.Element {
   return (
     <>
+      <p>These are my favourite babies:</p>
       {props.favourites.map((fav) => (
         <FavouriteItem
           key={fav.id}

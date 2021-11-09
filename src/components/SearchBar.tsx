@@ -13,17 +13,15 @@ export function Search(props: Props): JSX.Element {
         value={props.searchText}
         onChange={(e) => props.handleSearchText(e.target.value)}
       />
-      <div className="buttons">
-        <button className="girl" onClick={() => props.handleSearchSex("f")}>
-          👧
-        </button>
-        <button className="boy" onClick={() => props.handleSearchSex("m")}>
-          👦
-        </button>
-        <button className="allgender" onClick={() => props.handleSearchSex("")}>
-          🐤
-        </button>
-      </div>
+      <button className="girl" onClick={() => props.handleSearchSex("f")}>
+        👧
+      </button>
+      <button className="boy" onClick={() => props.handleSearchSex("m")}>
+        👦
+      </button>
+      <button className="allgender" onClick={() => props.handleSearchSex("")}>
+        🐤
+      </button>
     </>
   );
 }
