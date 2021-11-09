@@ -49,8 +49,6 @@ export function removeFavourites(
   favourite: BabyProp[],
   setFavourite: (name: BabyProp[]) => void
 ): void {
-  let nameToCompare: string;
-
   const favouriteRemoved = favourite.filter(
     (name) => name.name !== nameToRemove
   );
