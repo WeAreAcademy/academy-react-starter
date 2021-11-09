@@ -1,0 +1,36 @@
+// import { Baby } from "../components/babyname";
+// import { useState } from "react";
+// import { FilterButtons } from "../components/filterButtons";
+// import babies from "../babies.json";
+
+// interface Props {
+//   favourites: string[];
+//   BabyProps: {
+//     name: string;
+//     sex: string;
+//     id: number;
+//   };
+//   setFavourite(input: string[]): void;
+// }
+
+// export function Favourite(props: Props): JSX.Element {
+//   if (props.favourites.includes(props.BabyProps.name)) {
+//     props.favourites.splice(props.favourites.indexOf(props.BabyProps.name), 1);
+//     props.setFavourite([...props.favourites]);
+//   } else {
+//     props.setFavourite([...props.favourites, props.BabyProps.name]);
+//   }
+
+//   return (
+//     <div className="favs">
+//       My favourites: s
+//       {props.favourites
+//         .sort((a, b) => (a > b ? 1 : b > a ? -1 : 0))
+//         .map((bub, idx) => (
+//           <button key={idx} className="fav">
+//             {bub}{" "}
+//           </button>
+//         ))}
+//     </div>
+//   );
+// }
