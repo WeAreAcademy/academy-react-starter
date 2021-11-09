@@ -1,6 +1,7 @@
 interface Props {
   name: string;
   sex: string;
+  id: number;
   handleAddToFavourites(input: string): void;
 }
 

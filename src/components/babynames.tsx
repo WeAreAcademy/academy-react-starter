@@ -1,37 +1,47 @@
 import babies from "../babies.json";
 import { Baby } from "./babyname";
 import { useState } from "react";
-import { FilterButtons } from "./filterButtons";
 
 interface Props {
   searchText: string;
+  searchSex: string;
 }
 
 export function Babies(props: Props): JSX.Element {
   const [favourites, setFavourite] = useState<string[]>([]);
 
-  const filterBabies = babies
-    .filter((bab) => {
-      if (bab.name.toLowerCase().includes(props.searchText.toLowerCase()))
-        return bab;
-      else return false;
-    })
-    .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
-    .map((bab) => (
-      <Baby
-        key={bab.id}
-        name={bab.name}
-        sex={bab.sex}
-        handleAddToFavourites={(babyname: string) => {
-          if (favourites.includes(bab.name)) {
-            favourites.splice(favourites.indexOf(bab.name), 1);
-            setFavourite((favourites) => [...favourites]);
-          } else {
-            setFavourite((favourites) => [...favourites, bab.name]);
-          }
-        }}
-      />
-    ));
+  function filterBabies() {
+    const sortedBabies = babies.filter((bab) =>
+      bab.name.toLowerCase().includes(props.searchText.toLowerCase())
+    );
+    let sortedandOrderedBabies = sortedBabies.sort((a, b) =>
+      a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+    );
+    if (props.searchSex !== "") {
+      sortedandOrderedBabies = sortedandOrderedBabies.filter(
+        (bab) => bab.sex === props.searchSex
+      );
+    }
+    const objectBabies = sortedandOrderedBabies.map(
+      (bab: { id: number; sex: string; name: string }) => (
+        <Baby
+          id={bab.id}
+          key={bab.id}
+          sex={bab.sex}
+          name={bab.name}
+          handleAddToFavourites={(babyname: string) => {
+            if (favourites.includes(bab.name)) {
+              favourites.splice(favourites.indexOf(bab.name), 1);
+              setFavourite([...favourites]);
+            } else {
+              setFavourite([...favourites, bab.name]);
+            }
+          }}
+        />
+      )
+    );
+    return objectBabies;
+  }
 
   return (
     <>
@@ -46,9 +56,7 @@ export function Babies(props: Props): JSX.Element {
           ))}
       </div>
       <p></p>
-      <div className="allbabies">
-        {filterBabies.length !== 0 ? filterBabies : <p>No babies found</p>}
-      </div>
+      <div className="allbabies">{filterBabies()}</div>
     </>
   );
 }
