@@ -1,16 +1,10 @@
 import babies from "../babies.json";
 import { Baby } from "./babyname";
-import { FilterButtons } from "./filterButtons";
-import { Key, useState } from "react";
+import { useState } from "react";
 
 interface Props {
   searchText: string;
   searchSex: string;
-}
-interface PropBaby {
-  name: string;
-  id: number;
-  sex: string;
 }
 
 export function Babies(props: Props): JSX.Element {
