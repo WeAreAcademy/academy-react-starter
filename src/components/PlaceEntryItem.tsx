@@ -24,7 +24,11 @@ function MakePlaceEntry({
         <div>
           <h3>
             <b>
-              {city}, {country} (<a href={mapLink}>map link</a>)
+              {city}, {country} (
+              <a href={mapLink} target="_blank" rel="noopener noreferrer">
+                map link
+              </a>
+              )
             </b>
           </h3>
           <img src={image} alt="place" />
