@@ -7,7 +7,7 @@ interface PlaceEntryProps {
   image: string;
 }
 
-function PlaceEntry({
+function MakePlaceEntry({
   entryTitle,
   city,
   country,
@@ -17,7 +17,6 @@ function PlaceEntry({
 }: PlaceEntryProps): JSX.Element {
   return (
     <>
-      <img src={image} alt="place" />
       <section>
         <h2>
           <b>{entryTitle}</b>
@@ -28,11 +27,17 @@ function PlaceEntry({
               {city}, {country} (<a href={mapLink}>map link</a>)
             </b>
           </h3>
+          <img src={image} alt="place" />
         </div>
       </section>
       <p>{entryBody}</p>
+      <div>
+        <p>
+          ______________________________________________________________________________________________________________________
+        </p>
+      </div>
     </>
   );
 }
 
-export default PlaceEntry;
+export default MakePlaceEntry;
