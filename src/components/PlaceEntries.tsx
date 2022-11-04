@@ -17,6 +17,20 @@ function PlaceEntries(): JSX.Element {
           "I love the architectural style, and how it stands gloriously above my favourite city in the world, Paris. It has also been featured in some iconic films as well as a favourite of mine, The 400 Blows."
         }
       />
+      <MakePlaceEntry
+        entryTitle={"Coe Fen"}
+        city={"Cambridge"}
+        country={"UK"}
+        mapLink={
+          "https://www.google.com/maps/place/Coe+Fen,+Cambridge/@52.1999898,0.114662,17z/data=!4m15!1m8!3m7!1s0x47d85d89f32a012d:0x63a320e1a35e3d21!2sCambridge!3b1!8m2!3d52.1950788!4d0.1312729!16zL20vMDk3OHI!3m5!1s0x47d870a3b0cfec13:0x511e20416a9d974a!8m2!3d52.1984739!4d0.1165978!16s%2Fm%2F07kb8w3?hl=en-GB"
+        }
+        image={
+          "https://s0.geograph.org.uk/geophotos/03/99/67/3996781_f31f5ea8.jpg"
+        }
+        entryBody={
+          "Just incredibly beautiful. Weeping willows, punts on the river, oh and cows roaming about everywhere!"
+        }
+      />
     </section>
   );
 }
