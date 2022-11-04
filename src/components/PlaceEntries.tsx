@@ -31,6 +31,20 @@ function PlaceEntries(): JSX.Element {
           "Just incredibly beautiful. Weeping willows, punts on the river, oh and cows roaming about everywhere!"
         }
       />
+      <MakePlaceEntry
+        entryTitle={"Cortona"}
+        city={"Tuscany"}
+        country={"Italy"}
+        mapLink={
+          "https://www.google.com/maps/place/52044+Cortona,+Province+of+Arezzo,+Italy/@43.2747783,11.9849183,18z/data=!4m6!3m5!1s0x132bf97881a782d7:0x27cf7fa1dc70734e!8m2!3d43.2750634!4d11.98512!16zL20vMDI3ZzI1?hl=en-GB"
+        }
+        image={
+          "https://upload.wikimedia.org/wikipedia/commons/b/bf/Cortona-vista01.jpg"
+        }
+        entryBody={
+          "Adorable hillside town in Tuscany. I love Tuscan architecture so much, and this is an amazing example of it. Feels like you're in a film (there's actually a Hollywood film set in Cortona (because of this vibe probably)). Also, I've been here a couple of times with my closest friends so it's super nostalgic for me."
+        }
+      />
     </section>
   );
 }
