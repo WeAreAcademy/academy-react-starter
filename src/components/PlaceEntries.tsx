@@ -45,6 +45,20 @@ function PlaceEntries(): JSX.Element {
           "Adorable hillside town in Tuscany. I love Tuscan architecture so much, and this is an amazing example of it. Feels like you're in a film (there's actually a Hollywood film set in Cortona (because of this vibe probably)). Also, I've been here a couple of times with my closest friends so it's super nostalgic for me."
         }
       />
+      <MakePlaceEntry
+        entryTitle={"Sainte-Maxime"}
+        city={"Côte d'Azur"}
+        country={"France"}
+        mapLink={
+          "https://www.google.com/maps/place/83120+Sainte-Maxime,+France/@43.3582996,6.470374,12z/data=!3m1!4b1!4m6!3m5!1s0x12ceb99a895298d1:0x40819a5fd8fc990!8m2!3d43.310184!4d6.640482!16zL20vMGc2cjFu?hl=en-GB"
+        }
+        image={
+          "https://img.marinas.com/v2/17af349c3e869035f1c8867687efbfbe13d589d4d8b513b074f9d0d9a5ebbea0.jpg"
+        }
+        entryBody={
+          "Used to come here in the Summer with my family, so a super nostalgic place. Plus, the South of France is stunning. And it reminds me of Mr Bean's Holiday lol"
+        }
+      />
     </section>
   );
 }
