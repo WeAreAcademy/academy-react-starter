@@ -1,11 +1,10 @@
-import PlaceEntry from "./PlaceEntry";
+import PlaceEntries from "./PlaceEntries";
 
 function MainContent(): JSX.Element {
-    return (
-        <main>
-            <MainContent />
-        </main>
-    )
+  return (
+    <main>
+      <PlaceEntries />
+    </main>
+  );
 }
-
-export default MainContent
+export default MainContent;
