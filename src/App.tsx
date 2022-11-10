@@ -1,7 +1,10 @@
-import { greet } from "./utils/greet";
+import { AllPlacesView } from "./AllPlacesView";
 
 function App(): JSX.Element {
-  return <h1>{greet("World")}</h1>;
+  return <div>
+    <h1>Zac's fave places</h1>
+    <AllPlacesView />
+  </div>
 }
 
 export default App;
