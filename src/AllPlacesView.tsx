@@ -1,16 +1,23 @@
+import { PlaceView } from "./PlaceView"
 import { zacsPlaces, OnePlace } from "./zacsPlaces"
 
 
 
 export function AllPlacesView(): JSX.Element {
 
-    return (<div>All places view
+    return (<div>
+        <h1>All places view</h1>
         {
             zacsPlaces.map(
                 (placeItem: OnePlace) => (
-                    <p key={placeItem.title}>ONE PLACE {placeItem.title}
-                        <img src={placeItem.imageURL} />
-                        ITEM</p>)
+                    <PlaceView
+                        onePlace={placeItem}
+                        colour={"skyblue"}
+                        onlySummary={true}
+
+                        key={placeItem.title}
+                    />
+                )
             )
         }
 

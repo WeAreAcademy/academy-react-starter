@@ -1,8 +1,17 @@
 import React from "react";
+import { OnePlace } from "./zacsPlaces";
 
-export function PlaceView(): JSX.Element {
+
+interface PlaceViewProps {
+    onePlace: OnePlace;
+    colour: string;
+    onlySummary: boolean;
+}
+export function PlaceView(props: PlaceViewProps): JSX.Element {
     return (
-        <div>Single Place View asdlkajsf lsdkfj
+        <div className="place-view">
+            {props.onePlace.description}
+            {props.onePlace.imageURL}
         </div>
     )
 }
