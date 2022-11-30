@@ -14,7 +14,7 @@ function App(): JSX.Element {
     setInput(toDoInput);
   };
   const [tasks, setTasks] = useState<ITask[]>([])
-  const [editedText, setEditedText] = useState()
+  const [editedText, setEditedText] = useState<string>()
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -34,6 +34,7 @@ function App(): JSX.Element {
     setTasks(updatedNames);
   }
 const [contentEditable, setContentEditable] = useState(false)
+
   return (<>
     <h1 className="title"> TO DO APP </h1>
     <input placeholder="Write your task here"
@@ -43,20 +44,25 @@ const [contentEditable, setContentEditable] = useState(false)
     {/* saved todos */}
     {tasks && tasks.map(task => 
     <ul key={task.id}>  
-      <li><div contentEditable={contentEditable}> {task.task}</div> <button onClick={async () => { 
+      <li><div id = {String(task.id)} contentEditable={contentEditable}> {task.task}</div> 
+      <button onClick={async () => { 
       await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
       removeTask(task)}}>🗑️</button>
+
       {/* button to change  */}
       <button onClick={async () => { 
-      await axios.patch(`https://mariatens-todo-back-end.onrender.com/${task.id}`, {task: editedText})
       // access that and be able to modify it 
-      setContentEditable(!contentEditable)
-      }}>✍️</button>
-      
-       </li>
-      
-      
-    </ul>)}
+        setContentEditable(!contentEditable)
+        const container = document.getElementById(String(task.id));
+        if (container?.textContent){
+          setEditedText(container.textContent)
+        if (editedText){ //if the text was edited change its displayal
+          setEditedText(task.task)
+        }
+        }}}>✍️</button>
+        </li>  
+    </ul>
+      )}
 
   </>)
 }
