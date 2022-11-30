@@ -1,4 +1,3 @@
-import { greet } from "./utils/greet";
 import './App.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
