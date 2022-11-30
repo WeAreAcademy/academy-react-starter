@@ -14,6 +14,7 @@ function App(): JSX.Element {
     setInput(toDoInput);
   };
   const [tasks, setTasks] = useState<ITask[]>([])
+  const [editedText, setEditedText] = useState()
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -32,23 +33,30 @@ function App(): JSX.Element {
     );
     setTasks(updatedNames);
   }
-
+const [contentEditable, setContentEditable] = useState(false)
   return (<>
     <h1 className="title"> TO DO APP </h1>
     <input placeholder="Write your task here"
       value={input}
       onChange={(event) => { handleToDoInput(event.target.value) }}></input>
     <button onClick={() => axios.post("https://mariatens-todo-back-end.onrender.com", { task: input })}>+</button>
-
-    <p>Delete the task by clicking on them</p>
     {/* saved todos */}
     {tasks && tasks.map(task => 
-    <ul key={task.id}>
-      <li><button key={task.id} 
-      onClick={async () => { 
+    <ul key={task.id}>  
+      <li><div contentEditable={contentEditable}> {task.task}</div> <button onClick={async () => { 
       await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
-      removeTask(task);
-      }}>{task.task}</button></li></ul>)}
+      removeTask(task)}}>🗑️</button>
+      {/* button to change  */}
+      <button onClick={async () => { 
+      await axios.patch(`https://mariatens-todo-back-end.onrender.com/${task.id}`, {task: editedText})
+      // access that and be able to modify it 
+      setContentEditable(!contentEditable)
+      }}>✍️</button>
+      
+       </li>
+      
+      
+    </ul>)}
 
   </>)
 }
