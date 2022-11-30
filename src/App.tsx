@@ -44,25 +44,28 @@ const [contentEditable, setContentEditable] = useState(false)
     {/* saved todos */}
     {tasks && tasks.map(task => 
     <ul key={task.id}>  
-      <li><div id = {String(task.id)} contentEditable={contentEditable}> {task.task}</div> 
-      <button onClick={async () => { 
+      <li><div id = {String(task.id)} contentEditable={contentEditable}> {task.task}</div> <button onClick={async () => { 
       await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
       removeTask(task)}}>🗑️</button>
-
       {/* button to change  */}
       <button onClick={async () => { 
       // access that and be able to modify it 
-        setContentEditable(!contentEditable)
-        const container = document.getElementById(String(task.id));
-        if (container?.textContent){
-          setEditedText(container.textContent)
-        if (editedText){ //if the text was edited change its displayal
-          setEditedText(task.task)
+      setContentEditable(!contentEditable)
+      const container = document.getElementById(String(task.id));
+      if (container?.textContent){
+        await axios.patch(`https://mariatens-todo-back-end.onrender.com/${task.id}`, {task: container?.textContent})
+       setEditedText(container.textContent)
+        if (editedText){ //if text edited, display it 
+          task.task = editedText
         }
-        }}}>✍️</button>
-        </li>  
-    </ul>
-      )}
+        console.log(container?.textContent)
+      }
+      }}>✍️</button>
+      
+       </li>
+      
+      
+    </ul>)}
 
   </>)
 }
