@@ -47,9 +47,8 @@ function App(): JSX.Element {
       <li><button key={task.id} 
       onClick={() => { 
       removeTask(task);
-      axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`) 
-      }
-      }>{task.task}</button></li></ul>)}
+      axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`);
+      }}>{task.task}</button></li></ul>)}
 
   </>)
 }
