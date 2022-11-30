@@ -25,7 +25,7 @@ function App(): JSX.Element {
       setTasks(jsonBody);
     }
     fetchTasks()
-  }, tasks //we want it to fetch every time we click the plus button
+  }, [tasks] //we want it to fetch every time we click the plus button or delete one 
   )
   const removeTask = (oneTask: ITask) => {
     const updatedNames = tasks.filter(
@@ -47,8 +47,8 @@ function App(): JSX.Element {
     <ul key={task.id}>
       <li><button key={task.id} 
       onClick={() => { 
-      removeTask(task); 
-      // axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`) 
+      removeTask(task);
+      axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`) 
       }
       }>{task.task}</button></li></ul>)}
 
