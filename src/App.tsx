@@ -46,8 +46,8 @@ function App(): JSX.Element {
     <ul key={task.id}>
       <li><button key={task.id} 
       onClick={async () => { 
+      await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
       removeTask(task);
-      await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`);
       }}>{task.task}</button></li></ul>)}
 
   </>)
