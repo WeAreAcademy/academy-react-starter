@@ -40,47 +40,50 @@ const handleCompleted =  (task: ITask) => {
 
   return (<>
     <h1 className="title"> TO DO APP </h1>
+    <div className = "inputBox"> 
     <input placeholder="Write your task here"
       value={input}
       onChange={(event) => { handleToDoInput(event.target.value) }}></input>
     <button onClick={() => axios.post("https://mariatens-todo-back-end.onrender.com", { task: input })}>+</button>
+    </div>
     {/* saved todos */}
     {tasks && tasks.map(task => 
     <ul key={task.id}>  
       <li><div id = {String(task.id)} contentEditable={contentEditable}> 
       {task.task}</div> 
-      <button onClick={async () => { 
-      await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
-      removeTask(task)}}>🗑️</button>
-      {/* button to change  */}
-      <button onClick={async () => { 
-      // access that and be able to modify it 
-      setContentEditable(!contentEditable)
-      const container = document.getElementById(String(task.id));
-      if (container?.textContent){
-        await axios.patch(`https://mariatens-todo-back-end.onrender.com/${task.id}`, {task:container?.textContent})
-       setEditedText(container.textContent)
-        if (editedText){ //if text edited, display it 
-          task.task = editedText
-        }
-        console.log(container?.textContent)
-      }
-      }}>✍️</button>
-      {/* button to mark as complete-> part of API for that? */}
-      <button onClick = {async () => {
+         {/* button to delete */}
+        <button onClick={async () => { 
         await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
-        handleCompleted(task); 
-        removeTask(task); 
-    }
-    }>✔️</button>
-       </li>
+        removeTask(task)}}>🗑️</button>
+        {/* button to change  */}
+        <button onClick={async () => { 
+        setContentEditable(!contentEditable)
+        const container = document.getElementById(String(task.id));
+        if (container?.textContent){
+          await axios.patch(`https://mariatens-todo-back-end.onrender.com/${task.id}`, {task:container?.textContent})
+        setEditedText(container.textContent)
+          if (editedText){ //if text edited, display it 
+            task.task = editedText
+          }
+        }
+        }}>✍️</button>
+      {/* button to mark as complete*/}
+        <button onClick = {async () => {
+          await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
+          removeTask(task); 
+          await axios.post("https://mariatens-todo-back-end.onrender.com/completed-tasks")
+          handleCompleted(task); 
+        
+      }
+      }>✔️</button>
+      </li>
     </ul>)}
-    <hr></hr>
-    <h1>Completed tasks</h1>
+    <hr className = "completed"></hr>
+    <h2 className = "title">Completed tasks</h2>
     {completedTasks.map(compTask => 
-      <li key = {compTask.id}>
-        <ul><s>{compTask.task}</s></ul>
-      </li>)}
+      <ul key = {compTask.id}>
+        <li><s>{compTask.task}</s></li>
+      </ul>)}
 
   </>)
 }

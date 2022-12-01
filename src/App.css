@@ -1,3 +1,11 @@
 .title{
     text-align: center; 
 }
+
+.inputBox{
+    text-align: center;
+}
+
+.completed{
+    margin-top: 200px;
+}
