@@ -73,10 +73,8 @@ const handleCompleted =  (task: ITask) => {
           await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
           removeTask(task); 
           handleCompleted(task); 
-          await axios.post("https://mariatens-todo-back-end.onrender.com/completed-tasks", {task:document.getElementById(String(task.id))?.textContent,
-        date: new Date().toLocaleDateString()})
-         
-        
+        //   await axios.post("https://mariatens-todo-back-end.onrender.com/completed-tasks", {task:document.getElementById(String(task.id))?.textContent,
+        // date: new Date().toLocaleDateString()})
       }
       }>✔️</button>
       </li>
