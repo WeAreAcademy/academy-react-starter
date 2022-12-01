@@ -6,6 +6,7 @@ import axios from "axios";
 interface ITask {
   task: string
   id: number
+  date: Date
 }
 
 function App(): JSX.Element {
@@ -44,13 +45,13 @@ const handleCompleted =  (task: ITask) => {
     <input placeholder="Write your task here"
       value={input}
       onChange={(event) => { handleToDoInput(event.target.value) }}></input>
-    <button onClick={() => axios.post("https://mariatens-todo-back-end.onrender.com", { task: input })}>+</button>
+    <button onClick={async () => await axios.post("https://mariatens-todo-back-end.onrender.com", { task: input, date: new Date().toLocaleDateString() })}>+</button>
     </div>
     {/* saved todos */}
     {tasks && tasks.map(task => 
     <ul key={task.id}>  
       <li><div id = {String(task.id)} contentEditable={contentEditable}> 
-      {task.task}</div> 
+      {task.task} <small> {task.date}</small></div> 
          {/* button to delete */}
         <button onClick={async () => { 
         await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
@@ -60,7 +61,7 @@ const handleCompleted =  (task: ITask) => {
         setContentEditable(!contentEditable)
         const container = document.getElementById(String(task.id));
         if (container?.textContent){
-          await axios.patch(`https://mariatens-todo-back-end.onrender.com/${task.id}`, {task:container?.textContent})
+          await axios.patch(`https://mariatens-todo-back-end.onrender.com/${task.id}`, {task: container?.textContent})
         setEditedText(container.textContent)
           if (editedText){ //if text edited, display it 
             task.task = editedText
@@ -71,8 +72,10 @@ const handleCompleted =  (task: ITask) => {
         <button onClick = {async () => {
           await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
           removeTask(task); 
-          await axios.post("https://mariatens-todo-back-end.onrender.com/completed-tasks")
           handleCompleted(task); 
+          await axios.post("https://mariatens-todo-back-end.onrender.com/completed-tasks", {task:document.getElementById(String(task.id))?.textContent,
+        date: new Date().toLocaleDateString()})
+         
         
       }
       }>✔️</button>
