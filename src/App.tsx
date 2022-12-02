@@ -52,6 +52,7 @@ const handleToDoInput: (typedName: string) => void = (toDoInput: string) => {
       await axios.post("https://mariatens-todo-back-end.onrender.com",
        { task: input, date: new Date().toLocaleDateString() })
        fetchTasks()
+       setInput("")
       }
        }>+</button>
     </div>
@@ -59,7 +60,7 @@ const handleToDoInput: (typedName: string) => void = (toDoInput: string) => {
     {tasks && tasks.map(task => 
     <ul key={task.id}>  
       <li><div id = {String(task.id)} contentEditable={contentEditable}> 
-      {task.id}{task.task} <small> {task.date}</small></div> 
+      {task.task} <small> {task.date}</small></div> 
          {/* button to delete */}
         <button onClick={async () => { 
         await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
