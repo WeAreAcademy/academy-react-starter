@@ -2,7 +2,6 @@ import './App.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 interface ITask {
   task: string
   id: number
@@ -11,51 +10,61 @@ interface ITask {
 
 function App(): JSX.Element {
   const [input, setInput] = useState<string>("");
-  const handleToDoInput: (typedName: string) => void = (toDoInput: string) => {
-    setInput(toDoInput);
-  };
   const [tasks, setTasks] = useState<ITask[]>([])
   const [editedText, setEditedText] = useState<string>()
   const [completedTasks, setCompletedTasks] = useState<ITask[]>([])
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const response = await fetch(
-        "https://mariatens-todo-back-end.onrender.com"
-      );
-      const jsonBody = await response.json();
-      setTasks(jsonBody);
-    }
-    fetchTasks()
-  }, [tasks] //we want it to fetch every time we click the plus button or delete one 
-  )
-  const removeTask = (oneTask: ITask) => {
-    const updatedNames = tasks.filter(
-      (task) => task !== oneTask
+  const [contentEditable, setContentEditable] = useState(false)
+  const fetchTasks = async () => {
+    const response = await fetch(
+      "https://mariatens-todo-back-end.onrender.com"
     );
-    setTasks(updatedNames);
+    const jsonBody = await response.json();
+    setTasks(jsonBody);
   }
-const [contentEditable, setContentEditable] = useState(false)
-const handleCompleted =  (task: ITask) => {
-  setCompletedTasks([...completedTasks, task])}
+  useEffect(() => {
+    fetchTasks()
+  }, [] 
+  )
+  const fetchCompletedTasks = async () => {
+    const response = await fetch(
+      "https://mariatens-todo-back-end.onrender.com/completed-tasks"
+    );
+    const jsonBody = await response.json();
+    setCompletedTasks(jsonBody);
+  }
+  useEffect(() => {
+    fetchCompletedTasks()
+  }, [] 
+  )
 
+// const handleCompleted =  (task: ITask) => {
+//   setCompletedTasks([...completedTasks, task])}
+const handleToDoInput: (typedName: string) => void = (toDoInput: string) => {
+    setInput(toDoInput);
+  };
   return (<>
     <h1 className="title"> TO DO APP </h1>
     <div className = "inputBox"> 
     <input placeholder="Write your task here"
       value={input}
       onChange={(event) => { handleToDoInput(event.target.value) }}></input>
-    <button onClick={async () => await axios.post("https://mariatens-todo-back-end.onrender.com", { task: input, date: new Date().toLocaleDateString() })}>+</button>
+    <button onClick={async () => {
+      await axios.post("https://mariatens-todo-back-end.onrender.com",
+       { task: input, date: new Date().toLocaleDateString() })
+       fetchTasks()
+      }
+       }>+</button>
     </div>
     {/* saved todos */}
     {tasks && tasks.map(task => 
     <ul key={task.id}>  
       <li><div id = {String(task.id)} contentEditable={contentEditable}> 
-      {task.task} <small> {task.date}</small></div> 
+      {task.id}{task.task} <small> {task.date}</small></div> 
          {/* button to delete */}
         <button onClick={async () => { 
         await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
-        removeTask(task)}}>🗑️</button>
+        fetchTasks()
+        }}>🗑️</button>
         {/* button to change  */}
         <button onClick={async () => { 
         setContentEditable(!contentEditable)
@@ -70,11 +79,15 @@ const handleCompleted =  (task: ITask) => {
         }}>✍️</button>
       {/* button to mark as complete*/}
         <button onClick = {async () => {
-          await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)
-          removeTask(task); 
-          handleCompleted(task); 
-        //   await axios.post("https://mariatens-todo-back-end.onrender.com/completed-tasks", {task:document.getElementById(String(task.id))?.textContent,
-        // date: new Date().toLocaleDateString()})
+          await axios.post("https://mariatens-todo-back-end.onrender.com/completed-tasks",
+           {task:task.task,
+            date: new Date().toLocaleDateString()})
+            fetchTasks()
+          await axios.delete(`https://mariatens-todo-back-end.onrender.com/${task.id}`)// do it in the backend code of posting to completed tasks
+        //to keep them despite refreshes of the page do a fetch request here too
+        // await axios.get("https://mariatens-todo-back-end.onrender.com/completed-tasks") // 
+          fetchCompletedTasks()
+        // // //   // document.getElementById(String(task.id))?.textContent,
       }
       }>✔️</button>
       </li>
