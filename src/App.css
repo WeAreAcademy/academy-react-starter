@@ -9,3 +9,9 @@
 .completed{
     margin-top: 200px;
 }
+
+ul{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -23,7 +23,7 @@ function App(): JSX.Element {
   }
   useEffect(() => {
     fetchTasks()
-  }, [] 
+  }, [completedTasks] 
   )
   const fetchCompletedTasks = async () => {
     const response = await fetch(
@@ -39,7 +39,7 @@ function App(): JSX.Element {
 
 // const handleCompleted =  (task: ITask) => {
 //   setCompletedTasks([...completedTasks, task])}
-const handleToDoInput: (typedName: string) => void = (toDoInput: string) => {
+const handleToDoInput = (toDoInput: string) => {
     setInput(toDoInput);
   };
   return (<>
