@@ -16,7 +16,7 @@ function App(): JSX.Element {
   const [contentEditable, setContentEditable] = useState(false)
   const fetchTasks = async () => {
     const response = await fetch(
-      "https://mariatens-todo-sql-backend.onrender.com"
+      "https://mariatens-todo-sql-backend.onrender.com/tasks"
     );
     const jsonBody = await response.json();
     setTasks(jsonBody);
@@ -49,7 +49,7 @@ const handleToDoInput = (toDoInput: string) => {
       value={input}
       onChange={(event) => { handleToDoInput(event.target.value) }}></input>
     <button onClick={async () => {
-      await axios.post("https://mariatens-todo-sql-backend.onrender.com",
+      await axios.post("https://mariatens-todo-sql-backend.onrender.com/tasks",
        { task: input, date: new Date().toLocaleDateString() })
        fetchTasks()
        setInput("")
@@ -63,7 +63,7 @@ const handleToDoInput = (toDoInput: string) => {
       {task.task} <small> {task.date}</small></div> 
          {/* button to delete */}
         <button onClick={async () => { 
-        await axios.delete(`https://mariatens-todo-sql-backend.onrender.com/${task.id}`)
+        await axios.delete(`https://mariatens-todo-sql-backend.onrender.com/tasks/${task.id}`)
         fetchTasks()
         }}>🗑️</button>
         {/* button to change  */}
@@ -71,7 +71,7 @@ const handleToDoInput = (toDoInput: string) => {
         setContentEditable(!contentEditable)
         const container = document.getElementById(String(task.id));
         if (container?.textContent){
-          await axios.patch(`https://mariatens-todo-sql-backend.onrender.com/${task.id}`, {task: container?.textContent})
+          await axios.patch(`https://mariatens-todo-sql-backend.onrender.com/tasks/${task.id}`, {task: container?.textContent})
         setEditedText(container.textContent)
           if (editedText){ //if text edited, display it 
             task.task = editedText
@@ -84,7 +84,7 @@ const handleToDoInput = (toDoInput: string) => {
            {task:task.task,
             date: new Date().toLocaleDateString()})
             fetchTasks()
-          await axios.delete(`https://mariatens-todo-sql-backend.onrender.com/${task.id}`)// do it in the backend code of posting to completed tasks
+          await axios.delete(`https://mariatens-todo-sql-backend.onrender.com/tasks/${task.id}`)// do it in the backend code of posting to completed tasks
         //to keep them despite refreshes of the page do a fetch request here too
         // await axios.get("https://mariatens-todo-back-end.onrender.com/completed-tasks") // 
           fetchCompletedTasks()
