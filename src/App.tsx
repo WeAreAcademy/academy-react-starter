@@ -5,7 +5,7 @@ import axios from "axios";
 interface ITask {
   task: string
   id: number
-  date: Date
+  time: Date
 }
 
 function App(): JSX.Element {
@@ -50,7 +50,8 @@ const handleToDoInput = (toDoInput: string) => {
       onChange={(event) => { handleToDoInput(event.target.value) }}></input>
     <button onClick={async () => {
       await axios.post("https://mariatens-todo-sql-backend.onrender.com/tasks",
-       { task: input, date: new Date().toLocaleDateString() })
+       { task: input, 
+        time: new Date().toLocaleDateString() })
        fetchTasks()
        setInput("")
       }
@@ -60,7 +61,7 @@ const handleToDoInput = (toDoInput: string) => {
     {tasks && tasks.map(task => 
     <ul key={task.id}>  
       <li><div id = {String(task.id)} contentEditable={contentEditable}> 
-      {task.task} <small> {task.date}</small></div> 
+      {task.task} <small> {task.time}</small></div> 
          {/* button to delete */}
         <button onClick={async () => { 
         await axios.delete(`https://mariatens-todo-sql-backend.onrender.com/tasks/${task.id}`)
@@ -82,7 +83,7 @@ const handleToDoInput = (toDoInput: string) => {
         <button onClick = {async () => {
           await axios.post("https://mariatens-todo-sql-backend.onrender.com/completed-tasks",
            {task:task.task,
-            date: new Date().toLocaleDateString()})
+            time: new Date().toLocaleDateString()})
             fetchTasks()
           await axios.delete(`https://mariatens-todo-sql-backend.onrender.com/tasks/${task.id}`)// do it in the backend code of posting to completed tasks
         //to keep them despite refreshes of the page do a fetch request here too
