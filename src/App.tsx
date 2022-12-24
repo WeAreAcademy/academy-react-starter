@@ -42,20 +42,28 @@ function App(): JSX.Element {
 const handleToDoInput = (toDoInput: string) => {
     setInput(toDoInput);
   };
-  return (<>
-    <h1 className="title"> TO DO APP </h1>
-    <div className = "inputBox"> 
-    <input placeholder="Write your task here"
-      value={input}
-      onChange={(event) => { handleToDoInput(event.target.value) }}></input>
-    <button onClick={async () => {
+  const handleEnter = async () => {
       await axios.post("https://mariatens-todo-sql-backend.onrender.com/tasks",
        { task: input, 
         time: new Date().toISOString().substring(1,10) })
        fetchTasks()
        setInput("")
       }
-       }>+</button>
+
+  return (<>
+    <h1 className="title"> TO DO APP </h1>
+    <div className = "inputBox"> 
+    <input placeholder="Write your task here"
+      value={input}
+      onChange={(event) => { handleToDoInput(event.target.value) }}></input>
+    
+    <button 
+    onClick={handleEnter} 
+    onKeyDown={(e)=> {if ((e.key)==="Enter"){
+      handleEnter()
+      console.log("key working")
+    }}}>
+      +</button>
     </div>
     {/* saved todos */}
     {tasks && tasks.map(task => 
