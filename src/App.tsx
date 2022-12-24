@@ -51,7 +51,7 @@ const handleToDoInput = (toDoInput: string) => {
     <button onClick={async () => {
       await axios.post("https://mariatens-todo-sql-backend.onrender.com/tasks",
        { task: input, 
-        time: new Date().toLocaleDateString() })
+        time: new Date().toISOString().substring(1,10) })
        fetchTasks()
        setInput("")
       }
@@ -83,13 +83,10 @@ const handleToDoInput = (toDoInput: string) => {
         <button onClick = {async () => {
           await axios.post("https://mariatens-todo-sql-backend.onrender.com/completed-tasks",
            {task:task.task,
-            time: new Date().toLocaleDateString()})
+            time: new Date().toISOString().substring(1,10)})
             fetchTasks()
-          await axios.delete(`https://mariatens-todo-sql-backend.onrender.com/tasks/${task.id}`)// do it in the backend code of posting to completed tasks
-        //to keep them despite refreshes of the page do a fetch request here too
-        // await axios.get("https://mariatens-todo-back-end.onrender.com/completed-tasks") // 
+          await axios.delete(`https://mariatens-todo-sql-backend.onrender.com/tasks/${task.id}`)
           fetchCompletedTasks()
-        // // //   // document.getElementById(String(task.id))?.textContent,
       }
       }>✔️</button>
       </li>
