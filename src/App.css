@@ -1,68 +1,61 @@
-
-.navbar-btns:hover{
+.navbar-btns:hover {
   cursor: pointer;
 }
-.navbar-btns{
-  border:none;
+.navbar-btns {
+  border: none;
 }
 
 .title {
   text-align: center;
 }
 
-.title:hover{
-  cursor:pointer;
+.title:hover {
+  cursor: pointer;
 }
 
-.input-div{
+.input-div {
   display: flex;
   text-align: center;
   justify-content: center;
-
 }
-.task-ctn{
+.task-ctn {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
 
-
-.task{
+.task {
   border: none;
-  background: yellow; 
+  background: yellow;
   padding: 10px;
   width: 150px;
   height: 140px;
-  border-radius:0 0 0 30px/45px;
+  border-radius: 0 0 0 30px/45px;
   position: relative;
   text-align: center;
-  
-
 }
-.time{
+.time {
   font-style: italic;
-  display:block;
+  display: block;
 }
 
-.task-txt{
-  display:block;
+.task-txt {
+  display: block;
 }
-.btn-ctn{
+.btn-ctn {
   position: absolute;
   bottom: 0;
   float: left;
 }
 
-.add-button{
+.add-button {
   background-color: green;
   display: inline-block;
   border-radius: 50%;
   padding: 1px 6px;
 }
 
-
-
-.plus-sign{
+.plus-sign {
   color: whitesmoke;
 }
 .inputBox {
@@ -71,11 +64,10 @@
   border: none;
   margin-bottom: 20px;
 }
-.inputBox:hover{
+.inputBox:hover {
   box-shadow: #222426 0px 1px 2px;
 }
 
-.inputBox:focus{
+.inputBox:focus {
   outline: none;
 }
-
