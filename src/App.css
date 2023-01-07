@@ -1,17 +1,17 @@
-.title{
-    text-align: center; 
+.title {
+  text-align: center;
 }
 
-.inputBox{
-    text-align: center;
+.inputBox {
+  text-align: center;
 }
 
-.completed{
-    margin-top: 200px;
+.completed {
+  margin-top: 200px;
 }
 
-ul{
-    display:flex;
-    justify-content: center;
-    align-items: center;
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
