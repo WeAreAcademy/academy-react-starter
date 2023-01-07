@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { NavBar } from "./NavBar";
+import { Input } from "./Input";
 
 interface ITask {
   task: string;
@@ -53,30 +54,7 @@ function App(): JSX.Element {
     return (
       <>
         <NavBar setView={setView} />
-        <div className="input-div">
-          <textarea
-            className="inputBox"
-            placeholder="Write your task here"
-            value={input}
-            onChange={(event) => {
-              handleToDoInput(event.target.value);
-            }}
-          ></textarea>
-          <span>
-            <button
-              className="add-button"
-              onClick={handleEnter}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleEnter();
-                  console.log("key working");
-                }
-              }}
-            >
-              <span className="plus-sign">+</span>
-            </button>
-          </span>
-        </div>
+        <Input handleEnter={handleEnter} handleToDoInput={handleToDoInput} input={input}/>
         <div className="task-ctn">
           {/* saved todos */}
           {tasks &&
@@ -154,30 +132,7 @@ function App(): JSX.Element {
     return (
       <>
         <NavBar setView={setView} />
-        <div className="input-div">
-          <textarea
-            className="inputBox"
-            placeholder="Write your task here"
-            value={input}
-            onChange={(event) => {
-              handleToDoInput(event.target.value);
-            }}
-          ></textarea>
-          <span>
-            <button
-              className="add-button"
-              onClick={handleEnter}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleEnter();
-                  console.log("key working");
-                }
-              }}
-            >
-              <span className="plus-sign">+</span>
-            </button>
-          </span>
-        </div>
+        <Input handleEnter={handleEnter} handleToDoInput={handleToDoInput} input={input}/>
         <h2 className="title">Completed tasks</h2>
         <div className="task-ctn">
           {completedTasks.map((compTask) => (
