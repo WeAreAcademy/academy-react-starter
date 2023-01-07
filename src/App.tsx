@@ -1,12 +1,14 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { NavBar } from "./NavBar";
 
 interface ITask {
   task: string;
   id: number;
   time: Date;
 }
+export type View = "TodoTasks"|"CompletedTasks"
 
 function App(): JSX.Element {
   const [input, setInput] = useState<string>("");
@@ -14,6 +16,8 @@ function App(): JSX.Element {
   const [editedText, setEditedText] = useState<string>();
   const [completedTasks, setCompletedTasks] = useState<ITask[]>([]);
   const [contentEditable, setContentEditable] = useState(false);
+  const [view, setView] = useState<View>("TodoTasks");
+
   const fetchTasks = async () => {
     const response = await fetch(
       "https://mariatens-todo-sql-backend.onrender.com/tasks"
@@ -34,9 +38,6 @@ function App(): JSX.Element {
   useEffect(() => {
     fetchCompletedTasks();
   }, []);
-
-  // const handleCompleted =  (task: ITask) => {
-  //   setCompletedTasks([...completedTasks, task])}
   const handleToDoInput = (toDoInput: string) => {
     setInput(toDoInput);
   };
@@ -48,20 +49,20 @@ function App(): JSX.Element {
     await fetchTasks();
     setInput("");
   };
-
+  if (view === "TodoTasks"){
   return (
     <>
-      <h1 className="title"> TO DO APP </h1>
-      <div className="inputBox">
-        <input
+    <NavBar setView={setView}/>
+      <div className = "input-div">
+        <textarea className="inputBox"
           placeholder="Write your task here"
           value={input}
           onChange={(event) => {
             handleToDoInput(event.target.value);
           }}
-        ></input>
-
-        <button
+        ></textarea>
+<span>
+      <button className = "add-button"
           onClick={handleEnter}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -69,20 +70,21 @@ function App(): JSX.Element {
               console.log("key working");
             }
           }}
-        >
-          +
-        </button>
+          ><span className = "plus-sign">+</span>
+        </button></span>
       </div>
+      <div className = "task-ctn">
       {/* saved todos */}
       {tasks &&
         tasks.map((task) => (
-          <ul key={task.id}>
-            <li>
-              <div id={String(task.id)} contentEditable={contentEditable}>
-                {task.task} <small> {task.time}</small>
+          <div className = "task" key={task.id}>
+              <div className = "task-txt" id={String(task.id)} contentEditable={contentEditable}>
+                {task.task} 
               </div>
+              <div className = "btn-ctn">
+              <small className = "time"> {task.time}</small>
               {/* button to delete */}
-              <button
+              <button className = "del-btn"
                 onClick={async () => {
                   await axios.delete(
                     `https://mariatens-todo-sql-backend.onrender.com/tasks/${task.id}`
@@ -131,20 +133,42 @@ function App(): JSX.Element {
               >
                 ✔️
               </button>
-            </li>
-          </ul>
-        ))}
-      <hr className="completed"></hr>
+              </div>
+          </div>
+        ))}</div></>)}
+        else {
+          return(
+          <>
+            <NavBar setView={setView}/>
+      <div className = "input-div">
+        <textarea className="inputBox"
+          placeholder="Write your task here"
+          value={input}
+          onChange={(event) => {
+            handleToDoInput(event.target.value);
+          }}
+        ></textarea>
+<span>
+      <button className = "add-button"
+          onClick={handleEnter}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleEnter();
+              console.log("key working");
+            }
+          }}
+          ><span className = "plus-sign">+</span>
+        </button></span>
+      </div>
       <h2 className="title">Completed tasks</h2>
+      <div className = "task-ctn">
       {completedTasks.map((compTask) => (
-        <ul key={compTask.id}>
-          <li>
+        <div className="task"  key={compTask.id}>
+        <div>
             <s>{compTask.task}</s>
-          </li>
-        </ul>
-      ))}
-    </>
-  );
-}
-
+        </div>
+        </div>
+      ))}</div>
+      </>
+  )}}
 export default App;
