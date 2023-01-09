@@ -13,4 +13,15 @@ Extra features added:
 -   Prettier
 -   TypeScript
 -   Removed unneccessary logo images
+-   Removed unnecessary web-vitals
 -   Added an example extra module and unit test (greet.ts)
+-   Added more scripts to package.json
+
+```
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "lint": "eslint src",
+    "type-check": "tsc --noEmit"
+```
