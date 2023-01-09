@@ -8,6 +8,7 @@ This project was created using [Create React App](https://create-react-app.dev/)
 
 Extra features added:
 
+-   Add CI with GitHub Actions
 -   Add custom eslint config
 -   Prettier
 -   TypeScript
