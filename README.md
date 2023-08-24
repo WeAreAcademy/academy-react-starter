@@ -26,6 +26,20 @@ Extra features added:
     "type-check": "tsc --noEmit"
 ```
 
+### What's the jest / axios config in package.json?
+
+A workaround to jest incompatibilities with axios now that the latter is packaged as ESM.
+
+```json
+"jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
+  }
+```
+
+[Read more here](https://stackoverflow.com/a/74297004/669686)
+
 ## Learn more about Create-React-App
 
 You can learn more in the [Create React App documentation](https://create-react-app.dev/).
